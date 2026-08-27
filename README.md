@@ -1,239 +1,570 @@
-# MediaPipeHolistic
+# AEGIS — Multimodal Vision Core
 
 <p align="center">
-  <b>Real-Time Computer Vision & AI</b>
+  <b>Real-Time Multimodal Computer Vision System</b>
   <br>
-  Human pose tracking, object detection and camera-based AI with Python.
+  <sub>MediaPipe • YOLO11 • OWLv2 • OpenCV • Gesture Control</sub>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/OpenCV-Computer%20Vision-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV">
-  <img src="https://img.shields.io/badge/YOLO-Object%20Detection-111111?style=for-the-badge" alt="YOLO">
-  <img src="https://img.shields.io/badge/MediaPipe-ML%20Solutions-FF6F00?style=for-the-badge" alt="MediaPipe">
+  <img src="https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/OpenCV-Computer%20Vision-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white">
+  <img src="https://img.shields.io/badge/YOLO11-Object%20Detection-111111?style=for-the-badge">
+  <img src="https://img.shields.io/badge/MediaPipe-Holistic-FF6F00?style=for-the-badge">
+  <img src="https://img.shields.io/badge/OWLv2-Open%20Vocabulary-8A2BE2?style=for-the-badge">
 </p>
 
 ---
 
-## 📌 About
+## 🧠 Overview
 
-**MediaPipeHolistic** is a computer vision project focused on real-time analysis using a camera.
+**AEGIS** is a real-time multimodal computer vision system that combines several AI models into a single camera-based interface.
 
-The project combines modern AI and computer vision technologies such as **MediaPipe**, **YOLO**, **OpenCV** and **PyTorch** to experiment with real-time human and object understanding.
+The system processes a live camera feed and combines:
 
-The main goal of the project is to explore how different computer vision models can be combined into a single real-time pipeline.
+* **MediaPipe Holistic** for face and hand landmark tracking
+* **YOLO11n** for real-time object detection
+* **OWLv2** for open-vocabulary object search
+* **OpenCV** for image processing and real-time visualization
+* **Hand gestures** for interacting with detected objects
 
----
-
-## ✨ Features
-
-* 📷 **Real-time camera processing**
-* 🧠 **AI-based object detection with YOLO**
-* 🕺 **Human pose / holistic tracking with MediaPipe**
-* ⚡ **Real-time computer vision pipeline**
-* 🔬 Experiments with modern AI models
-* 🖥️ Designed to run locally on Linux
+The project is designed as an experimental platform for building interactive AI vision systems.
 
 ---
 
-## 🛠️ Tech Stack
+## ⚡ Core Features
 
-| Technology    | Purpose                          |
-| ------------- | -------------------------------- |
-| **Python**    | Main programming language        |
-| **MediaPipe** | Human landmark and pose tracking |
-| **YOLO**      | Object detection                 |
-| **OpenCV**    | Camera and image processing      |
-| **PyTorch**   | Deep learning backend            |
+### 👤 Human Tracking
+
+AEGIS uses MediaPipe Holistic to track:
+
+* Face landmarks
+* Left hand
+* Right hand
+* Hand positions
+* Hand gestures
+
+The face is rendered as a real-time landmark mesh.
 
 ---
 
-## 📂 Project Structure
+### 🖐️ Gesture Control
+
+The system recognizes several gestures:
+
+| Gesture           | Action                       |
+| ----------------- | ---------------------------- |
+| ✌️ **V SIGN**     | Switch operating mode        |
+| 🤏 **PINCH**      | Select / lock onto an object |
+| 🖐️ **OPEN HAND** | Release target               |
+| 👍 **THUMBS UP**  | Confirm selected target      |
+
+Gestures are processed directly from hand landmarks.
+
+---
+
+### 🎯 Object Detection
+
+AEGIS uses **YOLO11n** for real-time object detection.
+
+Detected objects receive:
+
+* Bounding boxes
+* Object labels
+* Confidence scores
+* Object IDs
+* Center points
+* Object-specific visualization
+
+The system also keeps track of:
 
 ```text
-MediaPipeHolistic/
-│
-├── main.py                  # Main application
-├── test_owl.py              # Computer vision / model experiment
-├── yolo11n.pt               # YOLO model weights
-│
-├── aegis_1787861642.png     # Project image
-├── aegis_1787862743.png     # Project image
-│
-├── .gitignore               # Git ignored files
-├── .python-version          # Python version configuration
-└── README.md                # Project documentation
+PEOPLE
+ANIMALS
+OBJECTS
 ```
 
 ---
 
-## 🚀 Installation
+### 🔎 Open-Vocabulary Search
 
-### 1. Clone the repository
+Unlike traditional object detection models with a fixed list of classes, AEGIS also includes **OWLv2**.
+
+This allows the system to search for objects using a natural-language query.
+
+For example:
+
+```text
+SEARCH: red backpack
+```
+
+or:
+
+```text
+SEARCH: laptop
+```
+
+The query is processed by:
+
+```text
+google/owlv2-base-patch16-ensemble
+```
+
+This makes the system capable of experimenting with **open-vocabulary object detection**.
+
+---
+
+## 🎯 Target Lock System
+
+AEGIS combines hand tracking with object detection to create an interactive target-selection system.
+
+The general interaction is:
+
+```text
+Hand
+ │
+ ▼
+Pointer
+ │
+ ▼
+Object Detection
+ │
+ ▼
+Object Under Pointer
+ │
+ ▼
+PINCH
+ │
+ ▼
+TARGET LOCK
+ │
+ ▼
+THUMBS UP
+ │
+ ▼
+TARGET CONFIRMED
+```
+
+The active target is highlighted using the interface's targeting visualization.
+
+---
+
+## 🖥️ Interface
+
+AEGIS includes a custom real-time HUD inspired by futuristic computer interfaces.
+
+The interface displays:
+
+```text
+AEGIS
+MULTIMODAL VISION CORE
+
+ONLINE
+FPS
+MODE
+
+BIOMETRIC
+FACE
+R-HAND
+L-HAND
+
+ENVIRONMENT
+PEOPLE
+ANIMALS
+OBJECTS
+```
+
+The interface also provides:
+
+* Real-time FPS
+* Current operating mode
+* Hand gesture status
+* Face tracking status
+* Object statistics
+* Search interface
+* Target lock panel
+* Camera controls
+
+---
+
+## 🔄 System Architecture
+
+```text
+                         ┌──────────────────┐
+                         │      CAMERA      │
+                         └────────┬─────────┘
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │      OpenCV      │
+                         │   Frame Input    │
+                         └────────┬─────────┘
+                                  │
+                    ┌─────────────┴─────────────┐
+                    │                           │
+                    ▼                           ▼
+           ┌─────────────────┐         ┌─────────────────┐
+           │    MediaPipe    │         │      YOLO11     │
+           │    Holistic     │         │     Object      │
+           │                 │         │    Detection    │
+           │ Face + Hands    │         └────────┬────────┘
+           └────────┬────────┘                  │
+                    │                           │
+                    └─────────────┬─────────────┘
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │ Gesture / Pointer│
+                         │    Controller    │
+                         └────────┬─────────┘
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │    Target Lock   │
+                         └──────────────────┘
+
+
+                  Open Vocabulary Search
+                           │
+                           ▼
+                    ┌──────────────┐
+                    │    OWLv2     │
+                    │ Text Query → │
+                    │    Objects   │
+                    └──────────────┘
+```
+
+---
+
+## 🛠️ Technologies
+
+| Technology       | Role                                   |
+| ---------------- | -------------------------------------- |
+| **Python**       | Main development language              |
+| **OpenCV**       | Camera, image processing and rendering |
+| **MediaPipe**    | Face and hand landmark tracking        |
+| **YOLO11n**      | Real-time object detection             |
+| **OWLv2**        | Open-vocabulary object detection       |
+| **PyTorch**      | Deep learning inference                |
+| **Transformers** | OWLv2 model integration                |
+
+---
+
+# 🚀 Installation
+
+## 📋 Requirements
+
+Recommended:
+
+* Python **3.10+**
+* Git
+* Webcam
+* Internet connection
+* At least **8 GB RAM**
+* GPU recommended for faster AI inference
+
+The project can run on CPU, although inference performance may be lower.
+
+---
+
+## 🐧 Linux / Ubuntu
+
+### 1. Install system dependencies
+
+```bash
+sudo apt update
+sudo apt install git python3 python3-pip python3-venv
+```
+
+Check:
+
+```bash
+python3 --version
+git --version
+```
+
+---
+
+### 2. Clone the repository
 
 ```bash
 git clone https://github.com/kr1on1x/MediaPipeHolistic.git
 cd MediaPipeHolistic
 ```
 
-### 2. Create a virtual environment
+---
+
+### 3. Create a virtual environment
 
 ```bash
 python3 -m venv .venv
 ```
 
-### 3. Activate the environment
-
-Linux / macOS:
+Activate it:
 
 ```bash
 source .venv/bin/activate
 ```
 
-Windows:
+---
 
-```powershell
-.venv\Scripts\activate
+### 4. Upgrade pip
+
+```bash
+python -m pip install --upgrade pip
 ```
 
-### 4. Install dependencies
+---
 
-If the project contains a `requirements.txt`:
+### 5. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Otherwise, install the required packages manually according to the imports used by the project.
-
 ---
 
-## ▶️ Running the Project
-
-Activate the virtual environment:
-
-```bash
-source .venv/bin/activate
-```
-
-Then run:
+### 6. Run AEGIS
 
 ```bash
 python main.py
 ```
 
-The application uses the connected camera as the input source for real-time computer vision processing.
+Make sure your webcam is connected and available.
 
 ---
 
-## 🤖 YOLO
+# 🪟 Windows
 
-The repository currently includes:
+### 1. Install
+
+Install:
+
+* Python 3.10+
+* Git
+
+During Python installation enable:
+
+```text
+Add Python to PATH
+```
+
+---
+
+### 2. Clone
+
+Open PowerShell:
+
+```powershell
+git clone https://github.com/kr1on1x/MediaPipeHolistic.git
+cd MediaPipeHolistic
+```
+
+---
+
+### 3. Create virtual environment
+
+```powershell
+python -m venv .venv
+```
+
+Activate:
+
+```powershell
+.venv\Scripts\activate
+```
+
+---
+
+### 4. Install dependencies
+
+```powershell
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+---
+
+### 5. Run
+
+```powershell
+python main.py
+```
+
+---
+
+# 🤖 OWLv2 Setup
+
+OWLv2 is downloaded automatically from Hugging Face when it is initialized for the first time.
+
+The project uses:
+
+```text
+google/owlv2-base-patch16-ensemble
+```
+
+The first initialization may take some time because the model files need to be downloaded and cached locally.
+
+A basic OWLv2 test is available in:
+
+```text
+test_owl.py
+```
+
+Run:
+
+```bash
+python test_owl.py
+```
+
+Expected output:
+
+```text
+Loading OWLv2...
+OWLv2 ONLINE
+```
+
+---
+
+# 🎮 Controls
+
+| Key / Gesture | Function            |
+| ------------- | ------------------- |
+| `Q` / `ESC`   | Exit                |
+| `F`           | Toggle fullscreen   |
+| `SPACE`       | Capture screenshot  |
+| `T`           | Start object search |
+| `ENTER`       | Execute search      |
+| `V SIGN`      | Switch mode         |
+| `PINCH`       | Lock onto object    |
+| `OPEN HAND`   | Release target      |
+| `THUMBS UP`   | Confirm target      |
+
+---
+
+# 📸 Screenshots
+
+Project screenshots can be found in the repository:
+
+```text
+aegis_1787861642.png
+aegis_1787862743.png
+```
+
+More screenshots and demonstrations will be added as the project develops.
+
+---
+
+# 📁 Project Structure
+
+```text
+MediaPipeHolistic/
+│
+├── main.py
+│   └── Main AEGIS application
+│
+├── test_owl.py
+│   └── OWLv2 initialization test
+│
+├── yolo11n.pt
+│   └── YOLO11n model weights
+│
+├── aegis_*.png
+│   └── Captured screenshots
+│
+├── requirements.txt
+│   └── Python dependencies
+│
+├── .gitignore
+│
+├── .python-version
+│
+└── README.md
+```
+
+---
+
+# 🔬 Development Goals
+
+AEGIS is an experimental project and is continuously evolving.
+
+Future development may include:
+
+* [ ] More accurate gesture recognition
+* [ ] Improved target tracking
+* [ ] Object tracking between frames
+* [ ] Better OWLv2 integration
+* [ ] Voice commands
+* [ ] More interaction modes
+* [ ] GPU optimization
+* [ ] Multi-camera support
+* [ ] Improved UI/HUD
+* [ ] Persistent target tracking
+* [ ] Recording and replay system
+* [ ] Modular AI pipeline
+* [ ] Performance profiling
+* [ ] Real-time event system
+
+---
+
+# 📊 Performance
+
+AEGIS displays real-time FPS directly in the HUD.
+
+Performance depends on:
+
+* CPU
+* GPU
+* RAM
+* Camera resolution
+* YOLO inference resolution
+* OWLv2 inference frequency
+* Number of active AI models
+
+The application uses asynchronous OWLv2 search so that open-vocabulary inference does not completely block the main camera loop.
+
+---
+
+# ⚠️ Notes
+
+### Model files
+
+The repository contains:
 
 ```text
 yolo11n.pt
 ```
 
-This is the YOLO model used for object detection experiments.
+OWLv2 model files are downloaded automatically and cached by the Hugging Face Transformers ecosystem.
 
-The `n` version is designed to provide a good balance between **inference speed and detection accuracy**, making it suitable for real-time applications.
+### Virtual environment
 
----
+The `.venv` directory is intentionally excluded from Git.
 
-## 📸 Computer Vision Pipeline
-
-The general idea of the project is:
-
-```text
-                Camera
-                   │
-                   ▼
-            ┌─────────────┐
-            │   OpenCV    │
-            │ Frame Input │
-            └──────┬──────┘
-                   │
-          ┌────────┴────────┐
-          ▼                 ▼
-   ┌─────────────┐   ┌─────────────┐
-   │  MediaPipe  │   │    YOLO     │
-   │ Pose /      │   │   Object    │
-   │ Landmarks   │   │  Detection  │
-   └──────┬──────┘   └──────┬──────┘
-          │                 │
-          └────────┬────────┘
-                   ▼
-            Real-Time Analysis
-```
-
-This architecture makes it possible to combine **human understanding** and **object detection** in the same camera pipeline.
+Each machine should create its own virtual environment.
 
 ---
 
-## 🧪 Experiments
+# 📜 License
 
-This repository is also used as an experimental environment for computer vision and AI.
+This project is currently intended for **educational, experimental and research purposes**.
 
-Possible directions include:
-
-* Human pose analysis
-* Object detection
-* Gesture recognition
-* Real-time interaction
-* AI-assisted camera applications
-* Combining multiple vision models
-* Performance optimization
+A dedicated open-source license may be added in the future.
 
 ---
 
-## 📈 Future Development
-
-Planned improvements:
-
-* [ ] Improve real-time inference performance
-* [ ] Add more computer vision models
-* [ ] Improve pose analysis
-* [ ] Add configurable camera settings
-* [ ] Add FPS and performance monitoring
-* [ ] Improve project architecture
-* [ ] Add a proper requirements file
-* [ ] Add automated testing
-* [ ] Add GPU acceleration where available
-* [ ] Create a more advanced real-time AI pipeline
-
----
-
-## 💻 Platform
-
-The project is primarily developed and tested on:
-
-```text
-OS: Linux
-Python: 3.x
-Environment: Virtual Environment
-```
-
-GPU acceleration may be used when supported by the installed PyTorch / AI stack.
-
----
-
-## 📜 License
-
-This project is currently provided for educational and experimental purposes.
-
-A dedicated open-source license can be added later.
-
----
-
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **kr1on1x**
 
 GitHub:
+
 https://github.com/kr1on1x
 
 ---
 
 <p align="center">
-  <b>Computer Vision • Artificial Intelligence • Real-Time Systems</b>
+  <b>AEGIS</b>
+  <br>
+  <sub>Multimodal Vision Core</sub>
 </p>
